@@ -18,20 +18,32 @@ public class GraphManager : MonoBehaviour
     public Link[] links;              //Array de links
     public Graph graph = new Graph(); //Codigo para el grafo esta ya creado en la carpeta "Graphs"
 
-    // Start is called before the first frame update
     void Start()
     {
-        //Si wayPoints tiene nodos definidos (prevenir estructura vacia)
-        //if (...) {
-            //Iteramos para cada WP y lo guardamos en la estructura graph
+        //Si waypoints tiene nodos definidos
+        if(waypoints.Length > 0){
 
-            //Iteramos para cada link y lo guardamos en la estructura graph
+            //Iteramos cada WP y lo guardamos en graph
+            foreach (GameObject wp in waypoints){
+                graph.AddNode(wp);
+            }
 
-        //}
+            //Iteramos cada Link y lo guardamos en graph
+            foreach(Link l in links){
+                graph.AddEdge(l.node1, l.node2);
+                if(l.dir == Link.direction.BI)
+                    graph.AddEdge(l.node2, l.node1);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
+    {
+        graph.debugDraw();
+    }
+
+    void OnDrawGizmos()
     {
         graph.debugDraw();
     }
