@@ -132,7 +132,7 @@ public class Graph
 				{
 					neighbour.cameFrom = thisnode;
 					neighbour.g = tentative_g_score;
-					neighbour.h = distance(thisnode,end);
+					neighbour.h = distance(neighbour,end);	//thisnode -> neighbour
 					neighbour.f = neighbour.g + neighbour.h;	
 				}
 			}
@@ -162,7 +162,7 @@ public class Graph
 	  float dy = a.yPos - b.yPos;
 	  float dz = a.zPos - b.zPos;
 	  float dist = dx*dx + dy*dy + dz*dz;
-	  return( dist );
+	  return Mathf.Sqrt(dist); //return( dist );
     }
 
     int lowestF(List<Node> l)
